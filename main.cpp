@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
   if (argc < 2)
   {
-    std::cerr << "[ERROR] Please a path your scene file (.json)" << std::endl;
+     std::cerr << "[ERROR] Please a path your scene file (.json)" << std::endl;
     std::cout << std::endl;
     exit(0);
   }
@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
   auto end = std::chrono::high_resolution_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 
+  std::cout << std::endl;
   std::cout << "Done." << std::endl;
   std::printf("Total time: %.3f seconds.\n", elapsed.count() * 1e-9);
 

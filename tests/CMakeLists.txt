@@ -18,6 +18,7 @@ add_library(test_utils
 )
 
 target_link_libraries(test_utils
+    PRIVATE Threads::Threads
     PUBLIC
     rayscene
     raymath

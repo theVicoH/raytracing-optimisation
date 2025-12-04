@@ -5,6 +5,8 @@
 #include "../rayimage/Image.hpp"
 #include "../rayscene/Scene.hpp"
 
+
+
 class Camera
 {
 private:
