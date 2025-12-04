@@ -23,6 +23,7 @@ bool Sphere::intersects(Ray &r, Intersection &intersection, CullingType culling)
   Vector3 OC = center - r.GetPosition();
 
   // Project OC onto the ray (assuming ray direction is normalized)
+  // Instead of OP = OC.projectOn(r.GetDirection()), we compute the length directly
   double opLength = OC.dot(r.GetDirection());
 
   // If the projection is negative, sphere is behind the ray origin
