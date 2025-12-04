@@ -17,6 +17,14 @@ void Sphere::applyTransform()
   this->center = this->transform.apply(c);
 }
 
+void Sphere::calculateBoundingBox()
+{
+  Vector3 radiusVec(radius, radius, radius);
+  Vector3 min = center - radiusVec;
+  Vector3 max = center + radiusVec;
+  this->boundingBox = AABB(min, max);
+}
+
 bool Sphere::intersects(Ray &r, Intersection &intersection, CullingType culling)
 {
   // Vector from ray origin to center of sphere

@@ -36,6 +36,7 @@ void Scene::prepare()
   for (int i = 0; i < objects.size(); ++i)
   {
     objects[i]->applyTransform();
+    objects[i]->calculateBoundingBox();
   }
 }
 
@@ -52,6 +53,11 @@ bool Scene::closestIntersection(Ray &r, Intersection &closest, CullingType culli
   bool found = false;
   for (int i = 0; i < objects.size(); ++i)
   {
+    if (!objects[i]->boundingBox.intersects(r))
+    {
+      continue;
+    }
+
     if (objects[i]->intersects(r, intersection, culling))
     {
 
