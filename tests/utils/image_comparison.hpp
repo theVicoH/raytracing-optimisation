@@ -6,9 +6,8 @@
 struct ImageComparisonResult
 {
     bool passed;
-    double psnr;
-    double mse;
-    int diffPixelCount;
+    std::string hash1;
+    std::string hash2;
     std::string message;
 };
 
@@ -18,28 +17,9 @@ public:
     static ImageComparisonResult compare(
         const std::string& referenceImagePath,
         const std::string& testImagePath,
-        double psnrThreshold = 40.0
+        double psnrThreshold = 40.0  // Kept for compatibility but unused
     );
 
-    static ImageComparisonResult comparePixelData(
-        const std::vector<unsigned char>& reference,
-        const std::vector<unsigned char>& test,
-        unsigned int width,
-        unsigned int height,
-        double psnrThreshold = 40.0
-    );
-
-    static double calculatePSNR(double mse, double maxValue = 255.0);
-    static double calculateMSE(
-        const std::vector<unsigned char>& img1,
-        const std::vector<unsigned char>& img2
-    );
-
-    static void saveDiffImage(
-        const std::string& outputPath,
-        const std::vector<unsigned char>& reference,
-        const std::vector<unsigned char>& test,
-        unsigned int width,
-        unsigned int height
-    );
+    static std::string calculateHash(const std::vector<unsigned char>& data);
+    static std::string calculateFileHash(const std::string& filepath);
 };

@@ -86,12 +86,6 @@ bool TestFixture::runRenderTest(
 
     PerformanceMetrics::printTestResult(testName, result.passed, result.message);
 
-    if (!result.passed && result.psnr > 0)
-    {
-        std::string diffFile = getOutputPath(testName + "_diff.png");
-        std::cout << "  Saving diff image to: " << diffFile << std::endl;
-    }
-
     delete scene;
     delete camera;
     delete image;
