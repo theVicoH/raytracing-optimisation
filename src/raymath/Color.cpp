@@ -55,10 +55,11 @@ Color Color::operator*(Color const &col)
 
 Color Color::operator/(float const &f)
 {
+  float invF = 1.0f / f;
   Color c;
-  c.r = std::max(std::min(r / f, 1.0f), 0.0f);
-  c.g = std::max(std::min(g / f, 1.0f), 0.0f);
-  c.b = std::max(std::min(b / f, 1.0f), 0.0f);
+  c.r = std::max(std::min(r * invF, 1.0f), 0.0f);
+  c.g = std::max(std::min(g * invF, 1.0f), 0.0f);
+  c.b = std::max(std::min(b * invF, 1.0f), 0.0f);
   return c;
 }
 

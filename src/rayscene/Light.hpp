@@ -10,11 +10,11 @@ private:
   Vector3 center;
 
 public:
-  Light(Vector3 c);
+  Light(const Vector3& c);
   ~Light();
 
   Color Diffuse = Color(0.5, 0.5, 0.5);
   Color Specular = Color(1, 1, 1);
 
-  Vector3 GetPosition();
+  const Vector3& GetPosition() const;
 };

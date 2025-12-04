@@ -6,7 +6,7 @@ Ray::Ray() : position(Vector3()), direction(Vector3(0, 0, 1))
 {
 }
 
-Ray::Ray(Vector3 pos, Vector3 dir) : position(pos)
+Ray::Ray(const Vector3& pos, const Vector3& dir) : position(pos)
 {
   direction = dir.normalize();
 }
@@ -15,7 +15,7 @@ Ray::~Ray()
 {
 }
 
-Vector3 Ray::GetPosition()
+const Vector3& Ray::GetPosition() const
 {
   return position;
 }
@@ -25,7 +25,7 @@ void Ray::SetPosition(Vector3 &pos)
   position = pos;
 }
 
-Vector3 Ray::GetDirection()
+const Vector3& Ray::GetDirection() const
 {
   return direction;
 }

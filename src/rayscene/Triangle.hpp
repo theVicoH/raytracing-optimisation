@@ -17,7 +17,7 @@ private:
   Vector3 tC;
 
 public:
-  Triangle(Vector3 a, Vector3 b, Vector3 c);
+  Triangle(const Vector3& a, const Vector3& b, const Vector3& c);
   ~Triangle();
 
   int ID;

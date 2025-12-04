@@ -3,7 +3,7 @@
 #include "Plane.hpp"
 #include "../raymath/Vector3.hpp"
 
-Plane::Plane(Vector3 p, Vector3 n) : point(p), normal(n)
+Plane::Plane(const Vector3& p, const Vector3& n) : point(p), normal(n)
 {
 }
 
@@ -24,7 +24,8 @@ bool Plane::intersects(Ray &r, Intersection &intersection, CullingType culling)
   }
 
   float numer = (point - r.GetPosition()).dot(normal);
-  float t = numer / denom;
+  float invDenom = 1.0f / denom;
+  float t = numer * invDenom;
 
   intersection.Position = r.GetPosition() + (r.GetDirection() * t);
   intersection.Normal = normal;
