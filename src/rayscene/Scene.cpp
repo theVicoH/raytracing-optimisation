@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 #include "Scene.hpp"
 #include "Intersection.hpp"
 
@@ -47,24 +48,24 @@ bool Scene::closestIntersection(Ray &r, Intersection &closest, CullingType culli
 {
   Intersection intersection;
 
-  double closestDistanceSquared = -1;
-  Intersection closestInter;
+  double closestDistanceSquared = std::numeric_limits<double>::infinity();
+  bool found = false;
   for (int i = 0; i < objects.size(); ++i)
   {
     if (objects[i]->intersects(r, intersection, culling))
     {
 
       double distSquared = (intersection.Position - r.GetPosition()).lengthSquared();
-      if (closestDistanceSquared < 0 || distSquared < closestDistanceSquared)
+      if (distSquared < closestDistanceSquared)
       {
         intersection.Distance = std::sqrt(distSquared);
         closestDistanceSquared = distSquared;
-        closestInter = intersection;
+        closest = intersection;
+        found = true;
       }
     }
   }
-  closest = closestInter;
-  return (closestDistanceSquared > -1);
+  return found;
 }
 
 Color Scene::raycast(Ray &r, Ray &camera, int castCount, int maxCastCount)

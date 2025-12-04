@@ -73,7 +73,7 @@ const Vector3 Vector3::normalize() const
 {
   double length = this->length();
 
-  if (length == 0)
+  if (length < 1e-10)
   {
     return Vector3();
   }

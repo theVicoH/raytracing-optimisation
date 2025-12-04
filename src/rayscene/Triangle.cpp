@@ -31,11 +31,8 @@ bool Triangle::intersects(Ray &r, Intersection &intersection, CullingType cullin
   //
   // If denom == 0 - it is parallel to the plane
   // If denom > 0, it means plane is behind the ray
-  if (culling == CULLING_FRONT && denom > -0.000001)
-  {
-    return false;
-  }
-  if (culling == CULLING_BACK && denom < 0.000001)
+  if ((culling == CULLING_FRONT && denom > -0.000001) ||
+      (culling == CULLING_BACK && denom < 0.000001))
   {
     return false;
   }
