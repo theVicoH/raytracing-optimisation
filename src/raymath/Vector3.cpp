@@ -43,10 +43,11 @@ const Vector3 Vector3::operator*(double const &f) const
 
 const Vector3 Vector3::operator/(double const &f) const
 {
+  double invF = 1.0 / f;
   Vector3 c;
-  c.x = x / f;
-  c.y = y / f;
-  c.z = z / f;
+  c.x = x * invF;
+  c.y = y * invF;
+  c.z = z * invF;
   return c;
 }
 
@@ -76,7 +77,8 @@ const Vector3 Vector3::normalize() const
   {
     return Vector3();
   }
-  return *this / length;
+  double invLength = 1.0 / length;
+  return *this * invLength;
 }
 
 double Vector3::dot(Vector3 const &vec) const

@@ -11,13 +11,13 @@ private:
 
 public:
   Ray();
-  Ray(Vector3 pos, Vector3 dir);
+  Ray(const Vector3& pos, const Vector3& dir);
   ~Ray();
 
-  Vector3 GetPosition();
+  const Vector3& GetPosition() const;
   void SetPosition(Vector3 &pos);
 
-  Vector3 GetDirection();
+  const Vector3& GetDirection() const;
   void SetDirection(Vector3 &pos);
 
   friend std::ostream &operator<<(std::ostream &_stream, Ray &vec);

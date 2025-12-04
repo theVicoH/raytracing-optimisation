@@ -4,7 +4,7 @@
 #include "Triangle.hpp"
 #include "../raymath/Vector3.hpp"
 
-Triangle::Triangle(Vector3 a, Vector3 b, Vector3 c) : SceneObject(), A(a), B(b), C(c)
+Triangle::Triangle(const Vector3& a, const Vector3& b, const Vector3& c) : SceneObject(), A(a), B(b), C(c)
 {
 }
 
@@ -41,7 +41,8 @@ bool Triangle::intersects(Ray &r, Intersection &intersection, CullingType cullin
   }
 
   float numer = (tA - r.GetPosition()).dot(normal);
-  float t = numer / denom;
+  float invDenom = 1.0f / denom;
+  float t = numer * invDenom;
 
   // Behind the ray
   if (t <= 0)

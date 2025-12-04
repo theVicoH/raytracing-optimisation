@@ -11,7 +11,7 @@ private:
   Vector3 normal;
 
 public:
-  Plane(Vector3 p, Vector3 n);
+  Plane(const Vector3& p, const Vector3& n);
   ~Plane();
 
   virtual bool intersects(Ray &r, Intersection &intersection, CullingType culling) override;

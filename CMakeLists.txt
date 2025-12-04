@@ -4,6 +4,14 @@ project(raytracer VERSION 0.1.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Optimization flags for performance
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -DNDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+
 add_executable(raytracer main.cpp)
 
 target_include_directories(raytracer PUBLIC

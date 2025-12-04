@@ -20,7 +20,7 @@ public:
 
   void add(SceneObject *object);
   void addLight(Light *light);
-  std::vector<Light *> getLights();
+  const std::vector<Light *>& getLights() const;
 
   void prepare();
   Color raycast(Ray &r, Ray &camera, int castCount, int maxCastCount);
