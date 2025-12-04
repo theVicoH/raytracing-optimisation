@@ -31,7 +31,7 @@ bool Sphere::intersects(Ray &r, Intersection &intersection, CullingType culling)
   {
     return false;
   }
-
+  
   // P is the corner of the right-angle triangle formed by O-C-P
   Vector3 P = r.GetPosition() + OP;
 
