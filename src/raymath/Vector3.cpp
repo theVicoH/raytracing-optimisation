@@ -14,33 +14,6 @@ Vector3::~Vector3()
 {
 }
 
-const Vector3 Vector3::operator+(Vector3 const &vec) const
-{
-  Vector3 c;
-  c.x = x + vec.x;
-  c.y = y + vec.y;
-  c.z = z + vec.z;
-  return c;
-}
-
-const Vector3 Vector3::operator-(Vector3 const &vec) const
-{
-  Vector3 c;
-  c.x = x - vec.x;
-  c.y = y - vec.y;
-  c.z = z - vec.z;
-  return c;
-}
-
-const Vector3 Vector3::operator*(double const &f) const
-{
-  Vector3 c;
-  c.x = x * f;
-  c.y = y * f;
-  c.z = z * f;
-  return c;
-}
-
 const Vector3 Vector3::operator/(double const &f) const
 {
   double invF = 1.0 / f;
@@ -64,11 +37,6 @@ double Vector3::length() const
   return std::sqrt(this->lengthSquared());
 }
 
-double Vector3::lengthSquared() const
-{
-  return (x * x + y * y + z * z);
-}
-
 const Vector3 Vector3::normalize() const
 {
   double length = this->length();
@@ -79,11 +47,6 @@ const Vector3 Vector3::normalize() const
   }
   double invLength = 1.0 / length;
   return *this * invLength;
-}
-
-double Vector3::dot(Vector3 const &vec) const
-{
-  return (x * vec.x + y * vec.y + z * vec.z);
 }
 
 const Vector3 Vector3::projectOn(Vector3 const &vec) const
