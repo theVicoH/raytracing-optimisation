@@ -1,0 +1,6 @@
+
+| Scène | 1. Sans Opti <br>*(1 Thread, No AABB)* | 2. Opti <br>*(1 Thread, No AABB)* | 3. Threading + Opti <br>*(4 Threads, No AABB)* | 4. AABB Seul <br>*(1 Thread, AABB On)* | 5. Full Opti <br>*(2/8 Threads + AABB)* |
+| :--- |:--------------------------------------:|:--------------------------------------:|:----------------------------------------------:|:--------------------------------------:|:---------------------------------------:|
+| **Sphères Simples** <br>*(two-spheres-on-plane)* |                 1.756s                 |                 0.636s                 |                0.165s                 |                 1.561s                 |             1.189s / 0.778s             |
+| **Sphère Galaxy on plane (Moyen)** <br>*(sphere-galaxy-on-plane)* |                46.898s                 |                9.626s                 |                2.161s                |                 6.319s                 |             4.508s / 2.412s             |
+| **Singe Mesh (Complexe)** <br>*(monkey-on-plane)* |              328.975s               |              186.529s               |            39.585s             |                109.207s                |            75.979s / 36.105s            |
