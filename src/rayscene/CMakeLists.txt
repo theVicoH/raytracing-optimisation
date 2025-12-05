@@ -1,4 +1,4 @@
-add_library(rayscene 
+add_library(rayscene
   ${CMAKE_CURRENT_SOURCE_DIR}/Camera.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/Scene.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/SceneObject.cpp
@@ -12,4 +12,5 @@ add_library(rayscene
   ${CMAKE_CURRENT_SOURCE_DIR}/CheckerMaterial.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/Mesh.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/SceneLoader.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/BVHNode.cpp
 )

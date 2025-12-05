@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 #include "Plane.hpp"
 #include "../raymath/Vector3.hpp"
 
@@ -9,6 +10,14 @@ Plane::Plane(const Vector3& p, const Vector3& n) : point(p), normal(n)
 
 Plane::~Plane()
 {
+}
+
+void Plane::calculateBoundingBox()
+{
+  const double inf = std::numeric_limits<double>::infinity();
+  Vector3 min(-inf, -inf, -inf);
+  Vector3 max(inf, inf, inf);
+  this->boundingBox = AABB(min, max);
 }
 
 bool Plane::intersects(Ray &r, Intersection &intersection, CullingType culling)

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "Mesh.hpp"
 #include "../raymath/Vector3.hpp"
 #include "../objloader/OBJ_Loader.h"
@@ -67,6 +68,28 @@ void Mesh::applyTransform()
     }
 }
 
+void Mesh::calculateBoundingBox()
+{
+    if (triangles.empty())
+    {
+        return;
+    }
+
+    const double inf = std::numeric_limits<double>::infinity();
+    this->boundingBox = AABB(Vector3(inf, inf, inf), Vector3(-inf, -inf, -inf));
+
+    for (Triangle* tri : triangles)
+    {
+        tri->calculateBoundingBox();
+        this->boundingBox.subsume(tri->boundingBox);
+    }
+}
+
+const std::vector<Triangle*>& Mesh::getTriangles() const
+{
+    return triangles;
+}
+
 bool Mesh::intersects(Ray &r, Intersection &intersection, CullingType culling)
 {
     Intersection tInter;
@@ -75,6 +98,11 @@ bool Mesh::intersects(Ray &r, Intersection &intersection, CullingType culling)
     Intersection closestInter;
     for (int i = 0; i < triangles.size(); ++i)
     {
+        if (!triangles[i]->boundingBox.intersects(r))
+        {
+            continue;
+        }
+
         if (triangles[i]->intersects(r, tInter, culling))
         {
 

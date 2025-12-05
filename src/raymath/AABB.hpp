@@ -21,5 +21,8 @@ public:
 
   bool intersects(Ray &r);
 
+  const Vector3& getMin() const;
+  const Vector3& getMax() const;
+
   friend std::ostream &operator<<(std::ostream &_stream, AABB const &box);
 };

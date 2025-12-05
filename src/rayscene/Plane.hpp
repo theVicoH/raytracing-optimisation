@@ -14,5 +14,6 @@ public:
   Plane(const Vector3& p, const Vector3& n);
   ~Plane();
 
+  virtual void calculateBoundingBox() override;
   virtual bool intersects(Ray &r, Intersection &intersection, CullingType culling) override;
 };
