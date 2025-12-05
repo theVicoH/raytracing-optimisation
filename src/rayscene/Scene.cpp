@@ -3,8 +3,10 @@
 #include <limits>
 #include "Scene.hpp"
 #include "Intersection.hpp"
+#include "Mesh.hpp"
+#include "Triangle.hpp"
 
-Scene::Scene()
+Scene::Scene() : bvhRoot(nullptr), useBVH(true)
 {
 }
 
@@ -18,6 +20,11 @@ Scene::~Scene()
   for (int i = 0; i < lights.size(); ++i)
   {
     delete lights[i];
+  }
+
+  if (bvhRoot != nullptr)
+  {
+    delete bvhRoot;
   }
 }
 
@@ -38,6 +45,38 @@ void Scene::prepare()
     objects[i]->applyTransform();
     objects[i]->calculateBoundingBox();
   }
+
+  if (useBVH)
+  {
+    std::vector<SceneObject*> allPrimitives;
+
+    for (SceneObject* obj : objects)
+    {
+      Mesh* mesh = dynamic_cast<Mesh*>(obj);
+      if (mesh != nullptr)
+      {
+        const std::vector<Triangle*>& triangles = mesh->getTriangles();
+        for (Triangle* tri : triangles)
+        {
+          allPrimitives.push_back(tri);
+        }
+      }
+      else
+      {
+        allPrimitives.push_back(obj);
+      }
+    }
+
+    std::cout << "🌳 Building BVH with " << allPrimitives.size() << " primitives (triangles + objects)..." << std::endl;
+    std::cout << "   Max objects per leaf: 16, Max depth: 24" << std::endl;
+    if (bvhRoot != nullptr)
+    {
+      delete bvhRoot;
+    }
+    bvhRoot = new BVHNode();
+    bvhRoot->build(allPrimitives, 16, 24);
+    std::cout << "✅ BVH construction complete!" << std::endl;
+  }
 }
 
 const std::vector<Light *>& Scene::getLights() const
@@ -47,6 +86,11 @@ const std::vector<Light *>& Scene::getLights() const
 
 bool Scene::closestIntersection(Ray &r, Intersection &closest, CullingType culling)
 {
+  if (useBVH && bvhRoot != nullptr)
+  {
+    return bvhRoot->findClosestIntersection(r, closest, culling);
+  }
+
   Intersection intersection;
 
   double closestDistanceSquared = std::numeric_limits<double>::infinity();

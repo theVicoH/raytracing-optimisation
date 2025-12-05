@@ -85,6 +85,11 @@ void Mesh::calculateBoundingBox()
     }
 }
 
+const std::vector<Triangle*>& Mesh::getTriangles() const
+{
+    return triangles;
+}
+
 bool Mesh::intersects(Ray &r, Intersection &intersection, CullingType culling)
 {
     Intersection tInter;
